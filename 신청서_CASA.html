@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 비서 만들기 1:1 맞춤교육 | CASA 융합심리연구소</title>
+  <style>
+    :root {
+      --primary: #7B5EA7;
+      --primary-dark: #52396E;
+      --primary-light: #A98BD0;
+      --accent: #EDE4FF;
+      --bg: #F9F7FC;
+      --white: #FFFFFF;
+      --text: #2A2A2A;
+      --text-muted: #888;
+      --border: #DDD4EC;
+      --warn-bg: #FFFBEA;
+      --warn-border: #F0C040;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: linear-gradient(150deg, var(--primary-dark) 0%, var(--primary) 60%, var(--primary-light) 100%);
+      color: white;
+      text-align: center;
+      padding: 40px 24px 36px;
+    }
+    .header .logo-wrap { margin-bottom: 12px; }
+    .header .logo-wrap img { height: 56px; width: auto; mix-blend-mode: screen; }
+    .header h1 { font-size: 1.75em; font-weight: 800; letter-spacing: -0.02em; line-height: 1.3; }
+    .header .tagline { margin-top: 10px; font-size: 0.88em; opacity: 0.85; }
+
+    /* ── CONTAINER ── */
+    .container { max-width: 660px; margin: 0 auto; padding: 26px 16px 70px; }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--white);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      padding: 22px 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 10px rgba(123,94,167,0.07);
+    }
+    .card-title {
+      font-size: 0.97em; font-weight: 700; color: var(--primary-dark);
+      margin-bottom: 16px; padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent);
+      display: flex; align-items: center; gap: 7px;
+    }
+
+    /* ── INFO ── */
+    .info-list { display: grid; gap: 9px; }
+    .info-row { display: flex; gap: 14px; font-size: 0.9em; }
+    .info-key { font-weight: 600; color: var(--primary-dark); min-width: 76px; flex-shrink: 0; }
+
+    /* ── PRICE ── */
+    .price-box {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      border-radius: 10px; color: white; text-align: center;
+      padding: 16px 20px; margin-top: 16px;
+    }
+    .price-box .price { font-size: 2em; font-weight: 800; letter-spacing: -0.03em; }
+    .price-box .price-sub { font-size: 0.82em; opacity: 0.85; margin-top: 4px; }
+
+    /* ── REFUND ── */
+    .refund-tbl { width: 100%; border-collapse: collapse; font-size: 0.87em; margin-top: 12px; overflow: hidden; border-radius: 8px; }
+    .refund-tbl th { background: var(--primary); color: white; padding: 9px 12px; text-align: center; }
+    .refund-tbl td { padding: 9px 12px; border-bottom: 1px solid var(--border); text-align: center; }
+    .refund-tbl tr:last-child td { border-bottom: none; }
+    .c-green  { color: #2E7D32; font-weight: 700; }
+    .c-orange { color: #E65100; font-weight: 700; }
+    .c-red    { color: #C62828; font-weight: 700; }
+
+    /* ── LEGEND ── */
+    .legend { display: flex; gap: 16px; font-size: 0.8em; color: var(--text-muted); margin-bottom: 14px; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: 5px; }
+    .legend-dot { width: 14px; height: 14px; border-radius: 4px; }
+    .ld-avail  { background: var(--accent); border: 2px solid var(--primary-light); }
+    .ld-sel    { background: var(--primary); }
+    .ld-taken  { background: #EEEEEE; border: 1.5px solid #DDDDDD; }
+
+    /* ── MONTH LABEL ── */
+    .month-label {
+      font-size: 0.95em; font-weight: 700; color: var(--primary);
+      margin: 18px 0 8px; display: flex; align-items: center; gap: 6px;
+    }
+
+    /* ── DAY ROW ── */
+    .day-rows { display: grid; }
+    .day-row {
+      display: flex; align-items: center;
+      padding: 6px 2px; gap: 10px;
+      border-bottom: 1px solid #F2EBF9;
+    }
+    .day-row:last-child { border-bottom: none; }
+    .day-row.has-avail { background: rgba(123,94,167,0.025); }
+    .week-gap { height: 6px; background: #F2EBF9; margin: 2px -2px; border-radius: 3px; }
+
+    .day-label { min-width: 82px; flex-shrink: 0; }
+    .day-num { font-size: 0.88em; font-weight: 700; color: var(--text); }
+    .day-name { font-size: 0.72em; color: var(--text-muted); margin-top: 1px; }
+
+    .time-slots { display: flex; gap: 7px; flex: 1; }
+
+    /* ── TIME BUTTON (default = grayed) ── */
+    .time-btn {
+      flex: 1; border: 1.5px solid #E3E3E3;
+      border-radius: 8px; padding: 7px 4px;
+      text-align: center; font-family: inherit;
+      font-size: 0.76em; background: #F3F3F3;
+      color: #C5C5C5; cursor: not-allowed;
+      transition: all 0.15s; user-select: none;
+    }
+    .time-btn .tl { display: block; font-weight: 600; }
+    .time-btn .tr { display: block; font-size: 0.88em; margin-top: 1px; opacity: 0.8; }
+
+    /* ── TIME BUTTON (available) ── */
+    .time-btn.avail {
+      border-color: var(--primary-light);
+      background: var(--accent);
+      color: var(--primary-dark);
+      cursor: pointer; font-weight: 600;
+    }
+    .time-btn.avail:hover {
+      border-color: var(--primary);
+      background: #DDD0F5;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(123,94,167,0.15);
+    }
+    /* ── TIME BUTTON (selected) ── */
+    .time-btn.selected {
+      background: var(--primary) !important;
+      color: white !important;
+      border-color: var(--primary) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(123,94,167,0.35);
+    }
+
+    /* ── FORM ── */
+    .slot-display {
+      background: var(--bg); border: 2px dashed var(--border);
+      border-radius: 9px; padding: 12px 16px; font-size: 0.88em;
+      color: var(--text-muted); margin-bottom: 16px;
+      min-height: 44px; display: flex; align-items: center;
+    }
+    .slot-display.filled {
+      border-color: var(--primary); background: var(--accent);
+      color: var(--primary-dark); font-weight: 700;
+    }
+
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 0.88em; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; }
+    .req { color: #E05C5C; margin-left: 2px; }
+    .form-group input, .form-group textarea {
+      width: 100%; padding: 10px 14px;
+      border: 1.5px solid var(--border); border-radius: 8px;
+      font-size: 0.93em; font-family: inherit;
+      color: var(--text); background: white; transition: border-color 0.18s;
+    }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); }
+    .form-group textarea { height: 100px; resize: vertical; }
+
+    /* ── PAYMENT ── */
+    .payment-box {
+      background: var(--warn-bg); border: 1.5px solid var(--warn-border);
+      border-radius: 9px; padding: 14px 16px; font-size: 0.87em;
+      margin-bottom: 20px; line-height: 1.75;
+    }
+    .payment-box strong { display: block; margin-bottom: 6px; color: #7A5900; }
+    .bank-info {
+      background: white; border: 1px solid var(--warn-border);
+      border-radius: 7px; padding: 10px 14px; margin-top: 10px;
+      font-size: 0.96em; font-weight: 700; color: #5A3F00;
+      line-height: 1.9;
+    }
+
+    /* ── SUBMIT ── */
+    .submit-btn {
+      width: 100%; padding: 16px;
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white; border: none; border-radius: 11px;
+      font-size: 1.05em; font-weight: 800;
+      cursor: pointer; font-family: inherit;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .submit-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+
+    .footer { text-align: center; font-size: 0.8em; color: var(--text-muted); margin-top: 22px; line-height: 1.9; }
+
+    @media (max-width: 400px) {
+      .header h1 { font-size: 1.4em; }
+      .day-label { min-width: 68px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo-wrap">
+    <img src="casa_logo.png" alt="CASA 융합심리연구소">
+  </div>
+  <h1>🤖 AI 비서 만들기<br>1:1 맞춤교육</h1>
+  <div class="tagline">나에게 딱 맞는 AI 비서를 직접 만들어보세요 · 2026년 7–8월</div>
+</div>
+
+<div class="container">
+
+  <!-- 프로그램 안내 -->
+  <div class="card">
+    <div class="card-title">📋 프로그램 안내</div>
+    <div class="info-list">
+      <div class="info-row"><span class="info-key">교육 방식</span><span>1:1 맞춤 교육 (3시간)</span></div>
+      <div class="info-row"><span class="info-key">오전 타임</span><span>11:00 – 14:00 &nbsp;☕ 커피 &amp; 다과 제공</span></div>
+      <div class="info-row"><span class="info-key">오후 타임</span><span>14:00 – 17:00 &nbsp;☕ 커피 &amp; 다과 제공</span></div>
+      <div class="info-row"><span class="info-key">장소</span><span>서울 종로구 북촌로 46-1 로우루프 4층</span></div>
+      <div class="info-row"><span class="info-key">준비물</span><span>⚠️ <strong>노트북 필수</strong></span></div>
+    </div>
+    <div class="price-box">
+      <div class="price">300,000원</div>
+      <div class="price-sub">3시간 · 1:1 맞춤 교육 · 다과 포함</div>
+    </div>
+  </div>
+
+  <!-- 결제 및 환불 -->
+  <div class="card">
+    <div class="card-title">💳 결제 및 환불 안내</div>
+    <p style="font-size:0.88em;color:var(--text-muted);margin-bottom:12px;">신청 후 입금 확인이 완료되어야 예약이 최종 확정됩니다.</p>
+    <table class="refund-tbl">
+      <thead><tr><th>취소 시점</th><th>환불 금액</th></tr></thead>
+      <tbody>
+        <tr><td>교육일 2주 전까지</td><td class="c-green">전액 환불 (100%)</td></tr>
+        <tr><td>교육일 1주 전까지</td><td class="c-orange">50% 환불</td></tr>
+        <tr><td>교육일 1주 이내</td><td class="c-red">환불 불가</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 날짜 선택 (JS 생성) -->
+  <div class="card">
+    <div class="card-title">📅 날짜 · 시간 선택 <span style="font-weight:400;font-size:0.85em;color:var(--text-muted);">(1개 선택)</span></div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot ld-avail"></div> 신청 가능</div>
+      <div class="legend-item"><div class="legend-dot ld-sel"></div> 선택됨</div>
+      <div class="legend-item"><div class="legend-dot ld-taken"></div> 신청 불가</div>
+    </div>
+    <div id="cal">불러오는 중...</div>
+  </div>
+
+  <!-- 신청 정보 -->
+  <div class="card">
+    <div class="card-title">✍️ 신청 정보 입력</div>
+    <div style="font-size:0.85em;color:var(--text-muted);margin-bottom:8px;">선택하신 날짜 · 시간</div>
+    <div class="slot-display" id="slotDisplay">위에서 날짜를 먼저 선택해 주세요</div>
+
+    <form id="form" action="https://formsubmit.co/casa.labs.kr@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="[CASA AI비서교육] 신청이 접수되었습니다">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="신청경로" value="CASA 융합심리연구소 자체">
+      <input type="hidden" name="선택날짜시간" id="slotInput" value="">
+
+      <div class="form-group">
+        <label>이름 <span class="req">*</span></label>
+        <input type="text" name="이름" required placeholder="홍길동">
+      </div>
+      <div class="form-group">
+        <label>연락처 <span class="req">*</span></label>
+        <input type="tel" name="연락처" required placeholder="010-0000-0000">
+      </div>
+      <div class="form-group">
+        <label>이메일 <span class="req">*</span></label>
+        <input type="email" name="이메일" required placeholder="example@email.com">
+      </div>
+      <div class="form-group">
+        <label>직업 / 소속 <span style="font-weight:400;color:var(--text-muted);">(선택)</span></label>
+        <input type="text" name="직업소속" placeholder="예: 미술치료사, 상담사, 교사 등">
+      </div>
+      <div class="form-group">
+        <label>배우고 싶은 내용 <span class="req">*</span></label>
+        <textarea name="배우고싶은내용" id="contentInput" required
+          placeholder="예) 컴퓨터 안에 나만의 AI 비서를 만들고 싶어요&#10;예) PPT를 예쁘고 깔끔하게 잘 만들고 싶어요&#10;예) 내 홈페이지를 만들고 싶어요&#10;예) 반복되는 업무를 자동화하고 싶어요"></textarea>
+      </div>
+
+      <div class="payment-box">
+        <strong>💳 입금 안내</strong>
+        신청서 제출 후 아래 계좌로 <strong>교육비 300,000원</strong>을 입금해 주세요.<br>
+        입금자명은 <strong>신청자 성함</strong>으로 해주세요.<br>
+        입금 확인 후 확정 안내 문자를 드립니다.
+        <div class="bank-info">
+          🏦 우리은행 &nbsp;|&nbsp; 1005-604-858903<br>
+          예금주: 한유진 (까사(CASA)융합심리연구소)
+        </div>
+      </div>
+      <button type="submit" class="submit-btn">신청서 제출하기 →</button>
+    </form>
+  </div>
+
+  <div class="footer">
+    CASA 융합심리연구소 &nbsp;|&nbsp; 서울 종로구 북촌로 46-1 로우루프 4층
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════
+//  ★ 신청 가능한 날짜·타임 설정 ★
+//  마감 처리: 해당 타임('AM' 또는 'PM')을 배열에서 삭제하면
+//             자동으로 회색처리됩니다.
+//  예) '7/15': ['AM', 'PM'] → '7/15': ['AM']  (오후 마감)
+//      '7/15': ['AM']       → '7/15': []       (오전도 마감)
+// ════════════════════════════════════════════════════════
+var available = {
+  '7/1':  ['AM'],
+  '7/2':  ['PM'],
+  '7/7':  ['AM'],
+  '7/15': ['AM', 'PM'],
+  '7/21': ['AM', 'PM'],
+  '7/23': ['AM'],
+  '7/28': ['AM', 'PM'],
+  '7/29': ['AM'],
+  '8/4':  ['AM', 'PM'],
+  '8/6':  ['PM'],
+  '8/11': ['AM'],
+  '8/12': ['PM'],
+  '8/19': ['PM'],
+  '8/20': ['AM', 'PM'],
+  '8/25': ['AM', 'PM'],
+  '8/26': ['PM'],
+  '8/27': ['PM']
+};
+
+var DAY_KR = ['일','월','화','수','목','금','토'];
+
+function getWeekdays(year, month) {
+  var days = [], d = new Date(year, month - 1, 1);
+  while (d.getMonth() === month - 1) {
+    if (d.getDay() >= 1 && d.getDay() <= 5) days.push(new Date(d));
+    d.setDate(d.getDate() + 1);
+  }
+  return days;
+}
+
+function renderCal() {
+  var months = [
+    { y: 2026, m: 7, label: '7월' },
+    { y: 2026, m: 8, label: '8월' }
+  ];
+  var html = '';
+
+  months.forEach(function(mo) {
+    var days = getWeekdays(mo.y, mo.m);
+    html += '<div class="month-label">📆 ' + mo.label + '</div><div class="day-rows">';
+
+    days.forEach(function(day, idx) {
+      // 주 구분선: 월요일 앞 (첫 번째 행 제외)
+      if (idx > 0 && day.getDay() === 1) {
+        html += '</div><div class="week-gap"></div><div class="day-rows">';
+      }
+
+      var key = mo.m + '/' + day.getDate();
+      var avail = available[key] || [];
+      var amOk = avail.indexOf('AM') >= 0;
+      var pmOk = avail.indexOf('PM') >= 0;
+      var dayName = DAY_KR[day.getDay()];
+      var dateStr = mo.m + '월 ' + day.getDate() + '일';
+      var labelAM = dateStr + ' (' + dayName + ') 오전 11:00–14:00';
+      var labelPM = dateStr + ' (' + dayName + ') 오후 14:00–17:00';
+
+      html += '<div class="day-row' + ((amOk || pmOk) ? ' has-avail' : '') + '">';
+      html += '<div class="day-label"><div class="day-num">' + dateStr + '</div><div class="day-name">' + dayName + '요일</div></div>';
+      html += '<div class="time-slots">';
+
+      // 오전
+      if (amOk) {
+        html += '<div class="time-btn avail" onclick="pick(this,\'' + labelAM.replace(/'/g, "\\'") + '\')">'
+              + '<span class="tl">오전</span><span class="tr">11:00–14:00</span></div>';
+      } else {
+        html += '<div class="time-btn"><span class="tl">오전</span><span class="tr">11:00–14:00</span></div>';
+      }
+
+      // 오후
+      if (pmOk) {
+        html += '<div class="time-btn avail" onclick="pick(this,\'' + labelPM.replace(/'/g, "\\'") + '\')">'
+              + '<span class="tl">오후</span><span class="tr">14:00–17:00</span></div>';
+      } else {
+        html += '<div class="time-btn"><span class="tl">오후</span><span class="tr">14:00–17:00</span></div>';
+      }
+
+      html += '</div></div>';
+    });
+
+    html += '</div>';
+  });
+
+  document.getElementById('cal').innerHTML = html;
+}
+
+renderCal();
+
+// ── 슬롯 선택 ──
+var cur = null;
+function pick(el, label) {
+  if (cur) cur.classList.remove('selected');
+  el.classList.add('selected');
+  cur = el;
+  var d = document.getElementById('slotDisplay');
+  d.textContent = '✅ ' + label;
+  d.classList.add('filled');
+  document.getElementById('slotInput').value = label;
+}
+
+// ── 제출 유효성 검사 ──
+document.getElementById('form').addEventListener('submit', function(e) {
+  if (!document.getElementById('slotInput').value) {
+    e.preventDefault();
+    alert('날짜와 시간을 선택해 주세요!');
+    return;
+  }
+  if (!document.getElementById('contentInput').value.trim()) {
+    e.preventDefault();
+    alert('배우고 싶은 내용을 입력해 주세요!');
+  }
+});
+</script>
+</body>
+</html>
