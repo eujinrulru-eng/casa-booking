@@ -105,12 +105,27 @@ footer{border-top:1px solid var(--g200);padding:32px 56px;max-width:900px;margin
 .ft-badge{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--em);display:flex;align-items:center;gap:6px;flex-shrink:0}
 
 @media(max-width:720px){
-  .hero{grid-template-columns:1fr}.hero-right{min-height:200px}
-  .hero-left{padding:36px 24px}.wrap{padding:0 24px}
+  .hero{grid-template-columns:1fr}.hero-right{min-height:220px}
+  .hero-left{padding:36px 20px}.wrap{padding:0 20px}
+  .hero-title{font-size:2.6rem}
   .details-grid{grid-template-columns:1fr 1fr;gap:20px 0}
-  .dc{border-right:none;border-bottom:1px solid var(--g200);padding:0 0 16px!important;margin-bottom:16px}
+  .dc{border-right:none;border-bottom:1px solid var(--g200);padding:0 0 14px!important;margin-bottom:14px}
+  .slot-table thead{display:none}
+  .slot-table tbody,.slot-table tr,.slot-table td{display:block;width:100%}
+  .slot-table tbody tr{border-bottom:none;padding-bottom:10px;margin-bottom:4px}
+  .slot-table tbody tr.wsep{border-top:2px solid var(--em-light);padding-top:16px;margin-top:8px}
+  .slot-table tbody td:first-child{font-size:.84rem;font-weight:700;color:var(--g900);margin-bottom:6px;padding-bottom:0}
+  .slot-table tbody td:not(:first-child){padding:3px 0}
+  .tbtn{width:100%;justify-content:center;padding:12px 16px;font-size:.82rem}
   .fgrid{grid-template-columns:1fr}.pay-box{grid-template-columns:1fr}
+  .refund{border-left:none;padding-left:0;border-top:1px solid var(--g200);padding-top:14px;margin-top:4px;white-space:normal}
   footer{flex-direction:column;padding:24px;margin-top:40px}
+  .hero-cards{padding:20px}.hcard{padding:12px 16px}.hcard-value{font-size:.82rem}
+}
+@media(max-width:380px){
+  .hero-title{font-size:2.1rem}
+  .hero-desc{font-size:.78rem}
+  .pill{font-size:.68rem;padding:5px 11px}
 }
 </style>
 </head>
@@ -251,7 +266,7 @@ footer{border-top:1px solid var(--g200);padding:32px 56px;max-width:900px;margin
         <div class="pay-box">
           <div>
             <div class="pay-lbl">입금 안내</div>
-            <div class="pay-val">우리은행 1005-604-858903<br>예금주 한유진(까사(CASA)융합심리연구소)</div>
+            <div class="pay-val">우리은행 1005-604-858903<br>예금주 한유진(까사(CASA)융합심리연구소)</div><div style="margin-top:10px;font-size:1.05rem;font-weight:800;color:var(--em)">교육비 30만원</div>
             <div class="pay-note">신청 후 <strong>48시간 이내 입금</strong> 시 예약이 확정됩니다.</div>
           </div>
           <div class="refund">
