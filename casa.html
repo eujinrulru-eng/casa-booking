@@ -20,8 +20,9 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 /* ── HERO ── */
 .hero{display:grid;grid-template-columns:1fr 400px;min-height:420px;border-bottom:1px solid var(--g200)}
 .hero-left{padding:52px 56px;display:flex;flex-direction:column;justify-content:space-between;gap:28px}
-.logo-dark{background:var(--black);border-radius:10px;padding:8px 14px;display:inline-flex;align-items:center;width:fit-content}
-.logo-dark img{height:40px;display:block}
+.logo-dark{background:var(--black);border-radius:10px;padding:10px 18px;display:inline-flex;align-items:center;width:fit-content;gap:8px}
+.logo-dark-text{font-size:1.1rem;font-weight:800;letter-spacing:.04em;color:var(--white)}
+.logo-dark-sub{font-size:.72rem;font-weight:500;color:rgba(255,255,255,.55);letter-spacing:.01em}
 .hero-eyebrow{font-size:.8rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--em)}
 .hero-title{font-size:clamp(2.4rem,4vw,3.6rem);font-weight:800;line-height:1.04;letter-spacing:-.04em;color:var(--g900);margin-top:6px}
 .hero-title .ac{color:var(--em)}
@@ -106,27 +107,36 @@ footer{border-top:1px solid var(--g200);padding:32px 56px;max-width:900px;margin
 .ft-badge{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--em);display:flex;align-items:center;gap:6px;flex-shrink:0}
 
 @media(max-width:720px){
-  .hero{grid-template-columns:1fr}.hero-right{min-height:220px}
-  .hero-left{padding:36px 20px}.wrap{padding:0 20px}
-  .hero-title{font-size:2.6rem}
-  .details-grid{grid-template-columns:1fr 1fr;gap:20px 0}
-  .dc{border-right:none;border-bottom:1px solid var(--g200);padding:0 0 14px!important;margin-bottom:14px}
+  .hero{grid-template-columns:1fr}
+  .hero-right{min-height:180px;order:1}
+  .hero-left{padding:32px 20px;order:2}
+  .wrap{padding:0 20px}
+  .hero-title{font-size:2.4rem}
+  .hero-desc{font-size:.95rem}
+  .details-grid{grid-template-columns:1fr;gap:0}
+  .dc{border-right:none;border-bottom:1px solid var(--g200);padding:14px 0!important;margin:0}
+  .dc:last-child{border-bottom:none}
   .slot-table thead{display:none}
   .slot-table tbody,.slot-table tr,.slot-table td{display:block;width:100%}
   .slot-table tbody tr{border-bottom:none;padding-bottom:10px;margin-bottom:4px}
   .slot-table tbody tr.wsep{border-top:2px solid var(--em-light);padding-top:16px;margin-top:8px}
   .slot-table tbody td:first-child{font-size:1.1rem;font-weight:700;color:var(--g900);margin-bottom:8px;padding-bottom:0}
   .slot-table tbody td:not(:first-child){padding:3px 0}
-  .tbtn{width:100%;justify-content:center;padding:14px 18px;font-size:1.05rem}
+  .tbtn{width:100%;justify-content:center;padding:16px 18px;font-size:1.05rem}
   .fgrid{grid-template-columns:1fr}.pay-box{grid-template-columns:1fr}
   .refund{border-left:none;padding-left:0;border-top:1px solid var(--g200);padding-top:14px;margin-top:4px;white-space:normal}
-  footer{flex-direction:column;padding:24px;margin-top:40px}
-  .hero-cards{padding:20px}.hcard{padding:12px 16px}.hcard-value{font-size:.82rem}
+  footer{flex-direction:column;align-items:flex-start;padding:24px 20px;margin-top:40px}
+  .hero-cards{padding:16px;flex-direction:row;flex-wrap:wrap;gap:8px}
+  .hcard{padding:12px 16px;flex:1;min-width:140px}
+  .hcard-value{font-size:.82rem}
+  .logo-dark-sub{display:none}
+  .submit-btn{padding:20px;font-size:1.15rem}
 }
 @media(max-width:380px){
-  .hero-title{font-size:2.1rem}
-  .hero-desc{font-size:.78rem}
-  .pill{font-size:.68rem;padding:5px 11px}
+  .hero-title{font-size:2rem}
+  .hero-desc{font-size:.88rem}
+  .pill{font-size:.72rem;padding:6px 12px}
+  .tbtn{font-size:1rem}
 }
 </style>
 </head>
@@ -135,7 +145,8 @@ footer{border-top:1px solid var(--g200);padding:32px 56px;max-width:900px;margin
 <header class="hero">
   <div class="hero-left">
     <div class="logo-dark">
-      <img src="casa_logo.png" alt="CASA 융합심리연구소">
+      <span class="logo-dark-text">CASA</span>
+      <span class="logo-dark-sub">융합심리연구소</span>
     </div>
     <div>
       <div class="hero-eyebrow">1:1 맞춤교육 신청</div>
@@ -149,7 +160,7 @@ footer{border-top:1px solid var(--g200);padding:32px 56px;max-width:900px;margin
     </div>
   </div>
   <div class="hero-right">
-    <img class="hero-bg-img" src="https://image.pollinations.ai/prompt/Swiss+editorial+design+abstract+AI+assistant+technology+concept%2C+emerald+green+and+sky+blue+geometric+shapes%2C+white+background%2C+minimal+clean+modern+professional+illustration%2C+no+text%2C+no+people%2C+grid+lines+circles+rectangles?width=800&height=840&seed=77&nologo=true" alt="" loading="eager">
+    <img class="hero-bg-img" src="feat_ai.png" alt="" loading="eager">
     <div class="hero-cards">
       <div class="hcard">
         <div class="hcard-label">교육 방식</div>
