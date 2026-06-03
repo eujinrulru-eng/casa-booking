@@ -28,7 +28,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 .hero-desc{font-size:1rem;color:var(--g600);line-height:1.8;margin-top:8px;max-width:360px}
 .hero-pills{display:flex;flex-wrap:wrap;gap:8px}
 .pill{display:inline-flex;align-items:center;gap:7px;background:var(--g100);border:1px solid var(--g200);border-radius:40px;padding:6px 14px;font-size:.82rem;font-weight:500;color:var(--g600)}
-.pill .dot{width:6px;height:6px;border-radius:50%;background:var(--em);flex-shrink:0}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--em);flex-shrink:0;box-shadow:0 0 0 2px rgba(5,150,105,.15)}
 
 /* Hero right — art panel */
 .hero-right{position:relative;overflow:hidden;background:linear-gradient(140deg,rgba(167,243,208,.28) 0%,rgba(125,211,252,.38) 50%,rgba(224,247,255,.65) 100%)}
@@ -37,13 +37,14 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 .hcard{background:rgba(255,255,255,.72);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.92);border-radius:14px;padding:16px 20px}
 .hcard-label{font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--em);margin-bottom:4px}
 .hcard-value{font-size:1rem;font-weight:600;color:var(--g900);line-height:1.45}
+.hero-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.85}
 
 /* ── WRAP ── */
 .wrap{max-width:900px;margin:0 auto;padding:0 56px}
 
 /* ── SECTION HEADER ── */
 .sec-head{display:flex;align-items:center;gap:14px;margin-bottom:32px}
-.sec-num{font-size:.58rem;font-weight:800;color:var(--white);background:var(--em);width:22px;height:22px;border-radius:50%;display:grid;place-items:center;flex-shrink:0}
+.sec-num{font-size:.65rem;font-weight:800;color:var(--white);background:var(--em);width:22px;height:22px;border-radius:50%;display:grid;place-items:center;flex-shrink:0}
 .sec-label{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--g400)}
 .sec-rule{flex:1;height:1px;background:var(--g200)}
 
@@ -148,19 +149,7 @@ footer{border-top:1px solid var(--g200);padding:32px 56px;max-width:900px;margin
     </div>
   </div>
   <div class="hero-right">
-    <svg class="bg" viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-      <circle cx="370" cy="-10" r="200" fill="rgba(52,211,153,.18)"/>
-      <circle cx="40" cy="380" r="160" fill="rgba(125,211,252,.22)"/>
-      <circle cx="240" cy="200" r="110" fill="rgba(255,255,255,.1)"/>
-      <line x1="0" y1="140" x2="400" y2="140" stroke="rgba(5,150,105,.11)" stroke-width="1"/>
-      <line x1="0" y1="280" x2="400" y2="280" stroke="rgba(5,150,105,.11)" stroke-width="1"/>
-      <line x1="133" y1="0" x2="133" y2="420" stroke="rgba(125,211,252,.14)" stroke-width="1"/>
-      <line x1="266" y1="0" x2="266" y2="420" stroke="rgba(125,211,252,.14)" stroke-width="1"/>
-      <rect x="155" y="55" width="90" height="90" rx="10" fill="rgba(255,255,255,.22)" transform="rotate(14 200 100)"/>
-      <circle cx="266" cy="140" r="36" fill="none" stroke="rgba(255,255,255,.38)" stroke-width="1.5"/>
-      <circle cx="133" cy="280" r="24" fill="rgba(52,211,153,.14)" stroke="rgba(52,211,153,.28)" stroke-width="1"/>
-      <circle cx="310" cy="320" r="50" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
-    </svg>
+    <img class="hero-bg-img" src="https://image.pollinations.ai/prompt/Swiss+editorial+design+abstract+AI+assistant+technology+concept%2C+emerald+green+and+sky+blue+geometric+shapes%2C+white+background%2C+minimal+clean+modern+professional+illustration%2C+no+text%2C+no+people%2C+grid+lines+circles+rectangles?width=800&height=840&seed=77&nologo=true" alt="" loading="eager">
     <div class="hero-cards">
       <div class="hcard">
         <div class="hcard-label">교육 방식</div>
