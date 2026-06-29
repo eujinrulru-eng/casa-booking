@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사전 설문 — CASA 융합심리연구소 AI 교육</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --em:#059669;--em-light:#A7F3D0;--em-ghost:rgba(5,150,105,.07);
+  --sky:#7DD3FC;--g900:#0F172A;--g600:#475569;--g400:#94A3B8;
+  --g200:#E2E8F0;--g100:#F8FAFC;--white:#FFFFFF;
+}
+html{font-size:18px}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--g100);color:var(--g900);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;padding:40px 20px 80px}
+
+.card{max-width:640px;margin:0 auto;background:var(--white);border-radius:20px;border:1px solid var(--g200);overflow:hidden;box-shadow:0 4px 32px rgba(15,23,42,.06)}
+
+/* Header */
+.header{background:var(--g900);padding:32px 36px}
+.header-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(5,150,105,.25);border:1px solid rgba(52,211,153,.3);border-radius:100px;padding:4px 14px;font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#34D399;margin-bottom:16px}
+.header-title{font-size:1.5rem;font-weight:800;color:var(--white);line-height:1.2;margin-bottom:8px}
+.header-sub{font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.6}
+
+/* Body */
+.body{padding:32px 36px}
+
+.q-block{margin-bottom:32px}
+.q-block:last-of-type{margin-bottom:0}
+.q-num{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--em);margin-bottom:6px}
+.q-text{font-size:1rem;font-weight:700;color:var(--g900);margin-bottom:4px;line-height:1.4}
+.q-hint{font-size:.8rem;color:var(--g400);margin-bottom:14px}
+
+/* Checkbox / Radio options */
+.options{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:center;gap:12px;padding:13px 16px;border:1.5px solid var(--g200);border-radius:10px;cursor:pointer;transition:all .15s;user-select:none}
+.opt:hover{border-color:var(--em-light);background:var(--em-ghost)}
+.opt input{width:18px;height:18px;accent-color:var(--em);cursor:pointer;flex-shrink:0}
+.opt-label{font-size:.95rem;color:var(--g900);font-weight:500}
+.opt.has-input{flex-wrap:wrap}
+.opt.has-input .opt-label{flex-shrink:0}
+.opt-extra{border:none;outline:none;font-family:inherit;font-size:.9rem;color:var(--g900);background:transparent;border-bottom:1px solid var(--g200);padding:2px 4px;min-width:120px;flex:1;transition:border-color .15s}
+.opt-extra:focus{border-bottom-color:var(--em)}
+
+/* Name field */
+.name-field{margin-bottom:28px}
+.name-field label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--g600);margin-bottom:8px}
+.name-field input{width:100%;font-family:inherit;font-size:1rem;color:var(--g900);background:var(--white);border:1.5px solid var(--g200);border-radius:10px;padding:13px 16px;outline:none;transition:border-color .15s}
+.name-field input:focus{border-color:var(--em)}
+
+.divider{height:1px;background:var(--g200);margin:28px 0}
+
+/* Submit */
+.submit-btn{width:100%;padding:18px;background:var(--em);color:var(--white);border:none;border-radius:10px;font-family:inherit;font-size:1rem;font-weight:700;letter-spacing:.04em;cursor:pointer;transition:all .2s;margin-top:28px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18)}
+.submit-btn:hover{background:#047857;transform:translateY(-1px)}
+
+.footer-note{font-size:.75rem;color:var(--g400);text-align:center;margin-top:16px;line-height:1.7}
+
+@media(max-width:520px){
+  body{padding:20px 12px 60px}
+  .header{padding:24px 20px}
+  .body{padding:24px 20px}
+  .header-title{font-size:1.25rem}
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="header">
+    <div class="header-badge">✦ CASA 융합심리연구소</div>
+    <div class="header-title">AI 교육 사전 설문</div>
+    <div class="header-sub">교육 전 간단히 답해주시면<br>맞춤으로 준비해갈게요 😊 (2분 소요)</div>
+  </div>
+
+  <div class="body">
+    <form action="https://formsubmit.co/casa.labs.kr@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="[사전설문] AI교육 사전 설문 답변">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+
+      <!-- 이름 -->
+      <div class="name-field">
+        <label>이름</label>
+        <input type="text" name="이름" placeholder="성함을 입력해주세요" required>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Q1 -->
+      <div class="q-block">
+        <div class="q-num">Question 01</div>
+        <div class="q-text">현재 사용 중인 AI 구독 서비스가 있나요?</div>
+        <div class="q-hint">해당되는 것 모두 선택해주세요</div>
+        <div class="options">
+          <label class="opt"><input type="checkbox" name="AI구독" value="ChatGPT (유료)"><span class="opt-label">ChatGPT 유료 (Plus / Team)</span></label>
+          <label class="opt"><input type="checkbox" name="AI구독" value="ChatGPT (무료)"><span class="opt-label">ChatGPT 무료</span></label>
+          <label class="opt"><input type="checkbox" name="AI구독" value="Claude (유료)"><span class="opt-label">Claude 유료 (Pro)</span></label>
+          <label class="opt"><input type="checkbox" name="AI구독" value="Claude (무료)"><span class="opt-label">Claude 무료</span></label>
+          <label class="opt"><input type="checkbox" name="AI구독" value="Gemini"><span class="opt-label">Gemini (구글)</span></label>
+          <label class="opt"><input type="checkbox" name="AI구독" value="Copilot"><span class="opt-label">Copilot (마이크로소프트)</span></label>
+          <label class="opt"><input type="checkbox" name="AI구독" value="없음"><span class="opt-label">없음 / 사용 안 함</span></label>
+          <label class="opt has-input">
+            <input type="checkbox" name="AI구독" value="기타">
+            <span class="opt-label">기타&nbsp;</span>
+            <input class="opt-extra" type="text" name="AI구독_기타" placeholder="직접 입력">
+          </label>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Q2 -->
+      <div class="q-block">
+        <div class="q-num">Question 02</div>
+        <div class="q-text">지금까지 PPT는 주로 어떻게 만들어왔나요?</div>
+        <div class="q-hint">해당되는 것 모두 선택해주세요</div>
+        <div class="options">
+          <label class="opt"><input type="checkbox" name="PPT방식" value="Microsoft PowerPoint"><span class="opt-label">Microsoft PowerPoint</span></label>
+          <label class="opt"><input type="checkbox" name="PPT방식" value="Canva"><span class="opt-label">Canva</span></label>
+          <label class="opt"><input type="checkbox" name="PPT방식" value="Google Slides"><span class="opt-label">Google Slides</span></label>
+          <label class="opt"><input type="checkbox" name="PPT방식" value="Keynote"><span class="opt-label">Keynote (맥/아이패드)</span></label>
+          <label class="opt"><input type="checkbox" name="PPT방식" value="잘 안 만들어봄"><span class="opt-label">잘 만들어본 적 없음</span></label>
+          <label class="opt has-input">
+            <input type="checkbox" name="PPT방식" value="기타">
+            <span class="opt-label">기타&nbsp;</span>
+            <input class="opt-extra" type="text" name="PPT방식_기타" placeholder="직접 입력">
+          </label>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Q3 -->
+      <div class="q-block">
+        <div class="q-num">Question 03</div>
+        <div class="q-text">PPT를 주로 어떤 용도로 만드시나요?</div>
+        <div class="q-hint">해당되는 것 모두 선택해주세요</div>
+        <div class="options">
+          <label class="opt"><input type="checkbox" name="PPT용도" value="학교 발표·과제"><span class="opt-label">학교 발표 / 과제</span></label>
+          <label class="opt"><input type="checkbox" name="PPT용도" value="업무 보고·프레젠테이션"><span class="opt-label">업무 보고 / 프레젠테이션</span></label>
+          <label class="opt"><input type="checkbox" name="PPT용도" value="상담 사례 보고서"><span class="opt-label">상담 사례 보고서</span></label>
+          <label class="opt"><input type="checkbox" name="PPT용도" value="자기소개·포트폴리오"><span class="opt-label">자기소개 / 포트폴리오</span></label>
+          <label class="opt"><input type="checkbox" name="PPT용도" value="기업·단체 소개"><span class="opt-label">기업 / 단체 소개</span></label>
+          <label class="opt"><input type="checkbox" name="PPT용도" value="강의·교육 자료"><span class="opt-label">강의 / 교육 자료</span></label>
+          <label class="opt has-input">
+            <input type="checkbox" name="PPT용도" value="기타">
+            <span class="opt-label">기타&nbsp;</span>
+            <input class="opt-extra" type="text" name="PPT용도_기타" placeholder="직접 입력">
+          </label>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Q4 추가 자유 답변 -->
+      <div class="q-block">
+        <div class="q-num">Question 04</div>
+        <div class="q-text">교육에서 가장 기대하는 것이 있다면?</div>
+        <div class="q-hint">자유롭게 적어주세요 (선택)</div>
+        <textarea name="기대사항" rows="3" style="width:100%;font-family:inherit;font-size:.95rem;color:var(--g900);background:var(--white);border:1.5px solid var(--g200);border-radius:10px;padding:13px 16px;outline:none;resize:vertical;transition:border-color .15s" onfocus="this.style.borderColor='#059669'" onblur="this.style.borderColor='#E2E8F0'" placeholder="예) 상담 사례보고서 PPT를 빠르게 만들고 싶어요"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">제출하기 →</button>
+      <div class="footer-note">답변은 교육 준비에만 활용되며 외부에 공유되지 않아요.</div>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>
