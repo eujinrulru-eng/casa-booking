@@ -293,7 +293,6 @@ footer{border-top:1px solid var(--g200);padding:32px 56px;max-width:900px;margin
 
 <script>
 var available={
-  '7/1':['AM'],'7/7':['AM'],
   '7/15':['AM','PM'],'7/21':['AM','PM'],'7/23':['AM'],
   '7/28':['AM','PM'],'7/29':['AM'],
   '8/4':['AM','PM'],'8/6':['PM'],'8/11':['AM'],
@@ -323,9 +322,12 @@ function btn(key,slot,lbl){
 function renderCal(){
   var mos=[{y:2026,m:7},{y:2026,m:8}];
   var html='';
+  var today=new Date(); today.setHours(0,0,0,0);
   mos.forEach(function(mo){
     var days=weekdays(mo.y,mo.m);
     days.forEach(function(d,i){
+      var past=d<today;
+      if(past)return;
       var mon=d.getDay()===1;
       var key=(d.getMonth()+1)+'/'+d.getDate();
       var ko=DAY_KO[d.getDay()];
